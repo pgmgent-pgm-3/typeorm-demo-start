@@ -22,6 +22,7 @@ $ npm run start:dev
 
 ## Useful references
 - [TypeORM](https://typeorm.io/)
+- [TypeORM met JavaScript](https://orkhan.gitbook.io/typeorm/docs/usage-with-javascript)
 
 ## Authors
 - Tim De Paepe
