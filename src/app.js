@@ -13,6 +13,7 @@ import { home } from "./controllers/home.js";
 import bodyParser from "body-parser";
 
 import DataSource from './lib/DataSource.js';
+import { deleteInterest, getInterests, postInterest, updateInterest } from "./controllers/api/interest.js";
 
 // init express
 const app = express();
@@ -34,6 +35,14 @@ app.set("views", VIEWS_PATH);
  * @todo: move to a separate file
  */
 app.get("/", home);
+
+/**
+ * API Routing
+ */
+app.get("/api/interest", getInterests);
+app.post("/api/interest", postInterest);
+app.delete("/api/interest/:id", deleteInterest);
+app.put("/api/interest", updateInterest);
 
 // start the server
 DataSource.initialize().then(() => {
