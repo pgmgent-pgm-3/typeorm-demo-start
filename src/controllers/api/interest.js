@@ -7,9 +7,7 @@ import DataSource from '../../lib/DataSource.js';
 export const getInterests = async (req, res, next) => {
   try {
     const interestRepository = DataSource.getRepository("Interest");
-    const interests = await interestRepository.findOne({
-      where: { name: req.body.name }
-    });
+    const interests = await interestRepository.find();
 
     // const interest = interests.filter((interest) => interest.id === 1);
     // console.log('interest with id 1', interest.pop());
@@ -53,7 +51,31 @@ export const postInterest = async (req, res, next) => {
 }
 
 export const deleteInterest = async (req, res, next) => {
+  try {
+    // get the id with destructuring
+    const { id } = req.params;
 
+    // get the interest repository
+    const interestRepository = DataSource.getRepository("Interest");
+
+    // get the interest with a specific id
+    const interest = await interestRepository.findOneBy({ id });
+
+    // does the interest exist?
+    if(interest) {
+      // remove the interest
+      await interestRepository.delete(interest);
+    }
+
+    // send a response
+    res.status(204).json({
+      status: 'We deleted the record in the database!'
+    });
+  } catch(e){
+    res.status(500).json({
+      status: "Er liep iets fout!"
+    });
+  }
 }
 
 export const updateInterest = async (req, res, next) => {
