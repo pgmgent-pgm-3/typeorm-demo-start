@@ -9,9 +9,6 @@ export const getUsers = async (req, res, next) => {
     const userRepository = DataSource.getRepository("User");
     const users = await userRepository.find();
 
-    // const user = users.filter((user) => user.id === 1);
-    // console.log('user with id 1', user.pop());
-
     res.status(200).json(users);
   } catch (e) {
     res.status(500).json({
@@ -25,7 +22,10 @@ export const postUser = async (req, res, next) => {
     const userRepository = DataSource.getRepository("User");
 
     // get existing user (if there is one...)
-    const user = await userRepository.findOneBy({ name: req.body.name });
+    const user = await userRepository.findOneBy({
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+    });
 
     // if we have an user, return the existing one
     if (user) {
