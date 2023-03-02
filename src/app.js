@@ -12,8 +12,19 @@ import { VIEWS_PATH } from "./consts.js";
 import { home } from "./controllers/home.js";
 import bodyParser from "body-parser";
 
-import DataSource from './lib/DataSource.js';
-import { deleteInterest, getInterests, postInterest, updateInterest } from "./controllers/api/interest.js";
+import DataSource from "./lib/DataSource.js";
+import {
+  deleteInterest,
+  getInterests,
+  postInterest,
+  updateInterest,
+} from "./controllers/api/interest.js";
+import {
+  deleteUser,
+  getUsers,
+  postUser,
+  updateUser,
+} from "./controllers/api/user.js";
 
 // init express
 const app = express();
@@ -44,13 +55,20 @@ app.post("/api/interest", postInterest);
 app.delete("/api/interest/:id", deleteInterest);
 app.put("/api/interest", updateInterest);
 
+app.get("/api/user", getUsers);
+app.post("/api/user", postUser);
+app.delete("/api/user/:id", deleteUser);
+app.put("/api/user", updateUser);
+
 // start the server
-DataSource.initialize().then(() => {
-  app.listen(process.env.PORT, () => {
-    console.log(
-      `Application is running on http://localhost:${process.env.PORT}/.`
-    );
+DataSource.initialize()
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log(
+        `Application is running on http://localhost:${process.env.PORT}/.`
+      );
+    });
+  })
+  .catch(function (error) {
+    console.log("Error: ", error);
   });
-}).catch(function(error) {
-  console.log('Error: ', error);
-});
