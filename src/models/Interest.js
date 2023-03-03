@@ -13,6 +13,15 @@ export default new EntitySchema({
     },
     name: {
       type: "varchar",
-    }
+    },
+  },
+  relations: {
+    users: {
+      target: "User", // name of the entity
+      type: "many-to-many", // type of relation
+      joinTable: {
+        name: "users_interests",
+      },
+    },
   },
 });

@@ -33,5 +33,13 @@ export default new EntitySchema({
       cascade: true,
       inverseSide: "baasje",
     },
+    interests: {
+      target: "Interest", // name of the entity
+      type: "many-to-many", // type of relation
+      joinTable: {
+        name: "users_interests",
+      },
+      cascade: true,
+    },
   },
 });
