@@ -8,7 +8,7 @@ export const getUsers = async (req, res, next) => {
   try {
     const userRepository = DataSource.getRepository("User");
     const users = await userRepository.find({
-      relations: ["lunchBox"],
+      relations: ["lunchBox", "pets", "interests"],
     });
 
     res.status(200).json(users);
