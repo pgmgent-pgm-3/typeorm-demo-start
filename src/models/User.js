@@ -27,5 +27,11 @@ export default new EntitySchema({
       inverseSide: "owner",
       cascade: true,
     },
+    pets: {
+      target: "Pet", // name of the entity
+      type: "one-to-many",
+      cascade: true,
+      inverseSide: "baasje",
+    },
   },
 });

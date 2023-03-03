@@ -7,7 +7,9 @@ import DataSource from "../../lib/DataSource.js";
 export const getUsers = async (req, res, next) => {
   try {
     const userRepository = DataSource.getRepository("User");
-    const users = await userRepository.find();
+    const users = await userRepository.find({
+      relations: ["lunchBox"],
+    });
 
     res.status(200).json(users);
   } catch (e) {
@@ -90,7 +92,22 @@ export const updateUser = async (req, res, next) => {
 
     // change the name of the user
     // user.name = req.body.name;
-    const newUser = { ...user, ...req.body };
+    const newUser = {
+      ...user,
+      ...req.body,
+      // pets: [
+      //   {
+      //     name: "Marie",
+      //     animal: "dog",
+      //     age: 12,
+      //   },
+      //   {
+      //     name: "Tim de tijger",
+      //     animal: "wild cat",
+      //     age: 5,
+      //   },
+      // ],
+    };
 
     // save the data in the database
     await userRepository.save(newUser);
