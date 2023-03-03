@@ -20,4 +20,14 @@ export default new EntitySchema({
       type: "varchar",
     },
   },
+  relations: {
+    owner: {
+      target: "User",
+      type: "one-to-one",
+      joinColumn: {
+        name: "user_id",
+      },
+      onDelete: "CASCADE",
+    },
+  },
 });

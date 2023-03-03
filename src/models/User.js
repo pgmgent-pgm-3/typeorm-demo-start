@@ -20,4 +20,12 @@ export default new EntitySchema({
       type: "int",
     },
   },
+  relations: {
+    lunchBox: {
+      target: "LunchBox",
+      type: "one-to-one",
+      inverseSide: "owner",
+      cascade: true,
+    },
+  },
 });
