@@ -34,7 +34,14 @@ export const postUser = async (req, res, next) => {
       });
     } else {
       // if the user does not exist... create a new one in the database!
-      await userRepository.save(req.body);
+      await userRepository.save({
+        ...req.body,
+        lunchBox: {
+          color: "red",
+          size: "big",
+          contents: "pizza",
+        },
+      });
 
       // let the client know that we added an entry
       res.status(201).json({
